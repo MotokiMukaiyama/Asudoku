@@ -7,6 +7,7 @@ import android.view.View;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import io.fabric.sdk.android.Fabric;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         //MobileAds の初期化
         //Sample ID : ca-app-pub-3940256099942544~3347511713
-//        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        MobileAds.initialize(this, "ca-app-pub-6583713279393026~6676624532");
         AdView mAdView;
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
