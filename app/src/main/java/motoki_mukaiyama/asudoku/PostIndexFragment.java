@@ -139,7 +139,6 @@ public class PostIndexFragment extends ListFragment {
                 viewHolder.title            = convertView.findViewById(R.id.title);
                 viewHolder.category         = convertView.findViewById(R.id.category);
                 viewHolder.createdDate      = convertView.findViewById(R.id.createdDate);
-//                viewHolder.image            = convertView.findViewById(R.id.);
                 viewHolder.evaluationStar1  = convertView.findViewById(R.id.evaluationStar1);
                 viewHolder.evaluationStar2  = convertView.findViewById(R.id.evaluationStar2);
                 viewHolder.evaluationStar3  = convertView.findViewById(R.id.evaluationStar3);
