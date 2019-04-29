@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "4228430904",
+    "firebase_url": "https://asudoku-4a8ae.firebaseio.com",
+    "project_id": "asudoku-4a8ae",
+    "storage_bucket": "asudoku-4a8ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4228430904:android:2508a4f0212f1621",
+        "android_client_info": {
+          "package_name": "motoki_mukaiyama.asudoku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4228430904-1jllsv03so9h43b23537ldcaj548dk4o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "motoki_mukaiyama.asudoku",
+            "certificate_hash": "2d953f7f2d38126e6170be9fec58cb7052f3e65d"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2VQB6TKR-cxA_1_1pf5clzycBCLlZtgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "4228430904-ium2j5u1dq55ok9f0k3rjcr44d9urso2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

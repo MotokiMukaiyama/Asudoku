@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">あす読</string>
+    <string name="titleHeaderText">タイトル</string>
+    <string name="authorHeaderText">著者</string>
+    <string name="categoryHeaderText">ジャンル</string>
+    <string name="evaluationHeaderText">評価</string>
+    <string name="acquisitionHeaderText">気づき</string>
+    <string name="actionHeaderText">アクション</string>
+    <string name="thoughtHeaderText">感想</string>
+    <string name="createButtonText">作成</string>
+    <string name="editButtonText">保存</string>
+    <string name="postMenuEditText">編集</string>
+    <string name="postMenuRemoveText">削除</string>
+    <string name="postRemoveConfirmText">この投稿を削除しますか？</string>
+    <string name="postRemoveConfirmYesText">はい</string>
+    <string name="postRemoveConfirmNoText">いいえ</string>
+    <string name="NoPostsText">投稿はまだありません</string>
+    <string name="menuAddText">新規作成</string>
+    <string name="testText">デザイン確認用テキスト</string>
+    <string name="ActionBarTitlePosts">あす読</string>
+    <string name="ActionBarTitleShow">投稿詳細</string>
+    <string name="ActionBarTitleCreate">新規作成</string>
+    <string name="ActionBarTitleEdit">編集</string>
+    <string name="google_app_id" translatable="false">1:4228430904:android:2508a4f0212f1621</string>
+    <string name="samplePostTitle">嫌われる勇気</string>
+    <string name="samplePostCategory">自己啓発</string>
+    <string name="samplePostCreatedDate">2019/04/08</string>
+    <string name="removeButtonText">削除</string>
+    <string name="dateShowFormat">yyyy/MM/dd</string>
+</resources>

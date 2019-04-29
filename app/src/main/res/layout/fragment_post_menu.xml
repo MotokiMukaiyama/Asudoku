@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--メニュー項目以外はグレーアウト-->
+    <FrameLayout
+        android:id="@+id/postMenuGrayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/menuItems"
+        android:background="#aa000000"
+        android:clickable="true"></FrameLayout>
+
+    <!--メニュー項目-->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/menuItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <!--編集-->
+        <LinearLayout
+            android:id="@+id/postMenuItemEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/AsudokuMenuItemImage"
+                android:src="@drawable/ic_edit" />
+
+            <TextView
+                style="@style/AsudokuMenuItemText"
+                android:text="@string/postMenuEditText" />
+        </LinearLayout>
+
+        <!--削除-->
+        <LinearLayout
+            android:id="@+id/postMenuItemRemove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/AsudokuMenuItemImage"
+                android:src="@drawable/ic_remove" />
+
+            <TextView
+                style="@style/AsudokuMenuItemText"
+                android:text="@string/postMenuRemoveText" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

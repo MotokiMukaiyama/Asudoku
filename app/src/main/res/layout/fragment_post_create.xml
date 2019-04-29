@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView"
+    android:background="@color/colorBase"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".PostCreateFragment">
+
+        <TextView
+            style="@style/AsudokuColumnHeader.Write"
+            android:text="@string/titleHeaderText" />
+        <EditText
+            android:id="@+id/titleCreate"
+            android:theme="@style/AsudokuColumn.Write"
+            style="@style/AsudokuColumn.Write" />
+
+        <!--評価-->
+        <TextView
+            style="@style/AsudokuColumnHeader.Write"
+            android:text="@string/evaluationHeaderText" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp">
+            <include layout="@layout/viewgroup_evaluation_stars_large"
+                android:id="@+id/include_views_evaluation_star_create"/>
+        </RelativeLayout>
+
+        <!--著者-->
+        <TextView
+            style="@style/AsudokuColumnHeader.Write"
+            android:text="@string/authorHeaderText" />
+        <EditText
+            android:id="@+id/authorCreate"
+            android:theme="@style/AsudokuColumn.Write"
+            style="@style/AsudokuColumn.Write" />
+
+        <!--カテゴリー-->
+        <TextView
+            style="@style/AsudokuColumnHeader.Write"
+            android:text="@string/categoryHeaderText" />
+        <EditText
+            android:id="@+id/categoryCreate"
+            android:theme="@style/AsudokuColumn.Write"
+            style="@style/AsudokuColumn.Write" />
+
+        <!--得たもの-->
+        <TextView
+            style="@style/AsudokuColumnHeader.Write"
+            android:text="@string/acquisitionHeaderText" />
+
+        <EditText
+            android:id="@+id/acquisitionCreate1"
+            android:theme="@style/AsudokuColumn.Write"
+            style="@style/AsudokuColumn.Write" />
+
+        <EditText
+            android:id="@+id/acquisitionCreate2"
+            android:theme="@style/AsudokuColumn.Write"
+            style="@style/AsudokuColumn.Write" />
+
+        <EditText
+            android:id="@+id/acquisitionCreate3"
+            android:theme="@style/AsudokuColumn.Write"
+            style="@style/AsudokuColumn.Write" />
+        <!--アクション-->
+        <TextView
+            style="@style/AsudokuColumnHeader.Write"
+            android:text="@string/actionHeaderText" />
+
+        <EditText
+            android:id="@+id/actionCreate1"
+            android:theme="@style/AsudokuColumn.Write"
+            style="@style/AsudokuColumn.Write" />
+
+        <EditText
+            android:id="@+id/actionCreate2"
+            android:theme="@style/AsudokuColumn.Write"
+            style="@style/AsudokuColumn.Write" />
+
+        <EditText
+            android:id="@+id/actionCreate3"
+            android:theme="@style/AsudokuColumn.Write"
+            style="@style/AsudokuColumn.Write" />
+
+        <!--感想-->
+        <TextView
+            android:visibility="gone"
+            style="@style/AsudokuColumnHeader.Write"
+            android:text="@string/thoughtHeaderText" />
+
+        <EditText
+            android:visibility="gone"
+            android:id="@+id/thoughtCreate"
+            android:theme="@style/AsudokuColumn.Write"
+            style="@style/AsudokuColumn.Write" />
+
+    </LinearLayout>
+</ScrollView>
+

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ShowFragment">
+
+    <ScrollView
+        android:id="@+id/ScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/postsLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp">
+
+            <TextView
+                android:id="@+id/titleHeader"
+                style="@style/AsudokuColumnHeader.Read"
+                android:text="@string/titleHeaderText" />
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/AsudokuColumn.Read"
+                android:textColor="@color/colorText"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="16dp"
+                android:textColor="@color/colorTextLight" />
+
+            <TextView
+                android:id="@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="16dp"
+                android:textColor="@color/colorTextLight" />
+
+            <TextView
+                android:id="@+id/createdDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextLight" />
+
+            <TextView
+                android:id="@+id/updatedDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextLight" />
+
+            <include
+                android:id="@+id/include_views_evaluation_star_show"
+                layout="@layout/viewgroup_evaluation_stars" />
+
+
+            <TextView
+                android:id="@+id/acquisitionHeader"
+                style="@style/AsudokuColumnHeader.Read"
+                android:layout_marginTop="10dp"
+                android:text="@string/acquisitionHeaderText" />
+
+            <TextView
+                android:id="@+id/acquisition1"
+                style="@style/AsudokuColumn.Read"
+                android:textColor="@color/colorText" />
+
+            <TextView
+                android:id="@+id/acquisition2"
+                style="@style/AsudokuColumn.Read"
+                android:textColor="@color/colorText" />
+
+            <TextView
+                android:id="@+id/acquisition3"
+                style="@style/AsudokuColumn.Read"
+                android:textColor="@color/colorText" />
+
+
+            <TextView
+                android:id="@+id/actHeader"
+                style="@style/AsudokuColumnHeader.Read"
+                android:text="@string/actionHeaderText" />
+
+            <TextView
+                android:id="@+id/action1"
+                style="@style/AsudokuColumn.Read"
+                android:textColor="@color/colorText" />
+
+            <TextView
+                android:id="@+id/action2"
+                style="@style/AsudokuColumn.Read"
+                android:textColor="@color/colorText" />
+
+            <TextView
+                android:id="@+id/action3"
+                style="@style/AsudokuColumn.Read"
+                android:textColor="@color/colorText" />
+
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/thoughtHeader"
+                style="@style/AsudokuColumnHeader.Read"
+                android:text="@string/thoughtHeaderText" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/thoughtCreate"
+                style="@style/AsudokuColumn.Read"
+                android:textColor="@color/colorText" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

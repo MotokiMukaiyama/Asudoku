@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--選択肢以外はグレーアウト-->
+    <FrameLayout
+        android:id="@+id/postRemoveConfirmGrayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/menuItems"
+        android:background="#aa000000"
+        android:clickable="true"></FrameLayout>
+
+    <!--選択肢-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff">
+
+        <TextView
+            style="@style/AsudokuMenuItemText"
+            android:text="@string/postRemoveConfirmText"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/postRemoveConfirmYes"
+            style="@style/AsudokuMenuItemText"
+            android:text="@string/postRemoveConfirmYesText" />
+
+        <TextView
+            android:id="@+id/postRemoveConfirmNo"
+            style="@style/AsudokuMenuItemText"
+            android:text="@string/postRemoveConfirmNoText" />
+
+    </LinearLayout>
+
+</RelativeLayout>

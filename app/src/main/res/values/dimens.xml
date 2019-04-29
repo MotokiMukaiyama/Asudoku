@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="postIndexTitleTextSize">18dp</dimen>
+    <dimen name="postIndexCategoryTextSIze">13dp</dimen>
+    <dimen name="postIndexCreatedDateTextSIze">13dp</dimen>
+    <dimen name="postIndexMemoTextSize">15dp</dimen>
+</resources>

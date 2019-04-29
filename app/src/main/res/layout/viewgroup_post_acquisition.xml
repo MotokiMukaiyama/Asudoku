@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp"
+    android:background="#00000000">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:tint="@color/colorMemoIcon"
+        android:src="@drawable/ic_acquisition4"
+        android:padding="4dp"/>
+
+    <TextView
+        android:id="@+id/text"
+        style="@style/AsudokuColumn.Read"
+        android:layout_toRightOf="@+id/image"
+        android:layout_marginLeft="4dp"
+        android:textSize="@dimen/postIndexMemoTextSize"
+        android:text="@string/testText"/>
+
+</RelativeLayout>

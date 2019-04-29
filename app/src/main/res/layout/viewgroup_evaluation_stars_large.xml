@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="left">
+
+    <ImageView
+        android:id="@+id/evaluationStar1"
+        style="@style/EvaluationStarLarge"
+        android:layout_marginLeft="0dp"
+        android:src="@drawable/ic_empty_star" />
+
+    <ImageView
+        android:id="@+id/evaluationStar2"
+        style="@style/EvaluationStarLarge"
+        android:layout_toRightOf="@+id/evaluationStar1"
+        android:src="@drawable/ic_empty_star" />
+
+    <ImageView
+        android:id="@+id/evaluationStar3"
+        style="@style/EvaluationStarLarge"
+        android:layout_toRightOf="@+id/evaluationStar2"
+        android:src="@drawable/ic_empty_star" />
+
+    <ImageView
+        android:id="@+id/evaluationStar4"
+        style="@style/EvaluationStarLarge"
+        android:layout_toRightOf="@+id/evaluationStar3"
+        android:src="@drawable/ic_empty_star" />
+
+    <ImageView
+        android:id="@+id/evaluationStar5"
+        style="@style/EvaluationStarLarge"
+        android:layout_toRightOf="@+id/evaluationStar4"
+        android:src="@drawable/ic_empty_star" />
+</RelativeLayout>

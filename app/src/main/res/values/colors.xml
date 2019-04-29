@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorBase">#ffffff</color>
+    <color name="colorMain">#009688</color>
+    <color name="colorMainDark">#028073</color>
+    <color name="colorMainLight">#8CB8B0</color>
+    <!--<color name="colorMain">#3F51B5</color>-->
+    <!--<color name="colorMainDark">#2F3E91</color>-->
+    <color name="colorBackground">#222222</color>
+    <color name="colorText">#222222</color>
+    <color name="colorTextLight">#777777</color>
+    <color name="colorIcon">#777777</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="colorEvaluationStar">#FFC107</color>
+    <color name="colorPostsSeparator">#cccccc</color>
+    <color name="colorMemoIcon">#979696</color>
+
+</resources>
