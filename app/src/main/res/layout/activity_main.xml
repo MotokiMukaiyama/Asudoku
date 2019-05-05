@@ -62,6 +62,7 @@
         android:background="@color/colorBase">main</RelativeLayout>
 
     <!--Sample Banner ID : ca-app-pub-3940256099942544/6300978111-->
+    <!--       Banner ID : ca-app-pub-6583713279393026/4588969476-->
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="wrap_content"
