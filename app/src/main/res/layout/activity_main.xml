@@ -32,7 +32,7 @@
 
         <!--編集ボタン-->
         <Button
-            android:id="@+id/actionBarEditButton"
+            android:id="@+id/actionBarSaveButton"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"

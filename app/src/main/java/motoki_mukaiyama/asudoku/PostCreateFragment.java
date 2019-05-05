@@ -39,7 +39,7 @@ public class PostCreateFragment extends Fragment {
 
         //ツールバーのボタン表示切替
         getActivity().findViewById(R.id.actionBarAddButton ).setVisibility(View.GONE);
-        getActivity().findViewById(R.id.actionBarEditButton).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.actionBarSaveButton).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.actionBarRemoveButton).setVisibility(View.GONE);
 
         //フォーカスのイベント
@@ -52,7 +52,7 @@ public class PostCreateFragment extends Fragment {
         });
 
         //作成ボタンのイベント
-        getActivity().findViewById(R.id.actionBarEditButton).setOnClickListener(new View.OnClickListener() {
+        getActivity().findViewById(R.id.actionBarSaveButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -98,8 +98,8 @@ public class PostCreateFragment extends Fragment {
             //タイトルが入力されているときだけ追加ボタンを有効にする
             String title = ((EditText) view).getText().toString();
             // @formatter:off
-            if(title.isEmpty()) (getActivity().findViewById(R.id.actionBarEditButton)).setEnabled(false);
-            else                (getActivity().findViewById(R.id.actionBarEditButton)).setEnabled(true);
+            if(title.isEmpty()) (getActivity().findViewById(R.id.actionBarSaveButton)).setEnabled(false);
+            else                (getActivity().findViewById(R.id.actionBarSaveButton)).setEnabled(true);
             // @formatter:on
         }
     }
