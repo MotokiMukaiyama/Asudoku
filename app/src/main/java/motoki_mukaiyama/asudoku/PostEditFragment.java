@@ -24,9 +24,13 @@ public class PostEditFragment extends Fragment {
     }
 
     public static PostEditFragment newInstance(int postId) {
-        PostEditFragment postEditFragment = new PostEditFragment();
+
+        //引数を作成
         Bundle args = new Bundle();
         args.putInt(PostIndexFragment.EXTRA_ID, postId);
+
+        //引数を設定して、フラグメントを返す
+        PostEditFragment postEditFragment = new PostEditFragment();
         postEditFragment.setArguments(args);
         return postEditFragment;
     }
