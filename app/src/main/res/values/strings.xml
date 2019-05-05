@@ -27,4 +27,8 @@
     <string name="samplePostCreatedDate">2019/04/08</string>
     <string name="removeButtonText">削除</string>
     <string name="dateShowFormat">yyyy/MM/dd</string>
+    <!--<string name="appDbName">asudoku.db</string>-->
+    <!--<string name="testDbName">test_asudoku.db</string>-->
+    <!--<string name="appDbVersion">32</string>-->
+    <!--<string name="testDbVersion">1</string>-->
 </resources>

@@ -39,7 +39,7 @@ public class PostIndexFragment extends ListFragment {
         //TODO 関数化する fragment違うとfindViewById呼び出せない？
         //ツールバーのボタン表示切替
         getActivity().findViewById(R.id.actionBarAddButton ).setVisibility(View.VISIBLE);
-        getActivity().findViewById(R.id.actionBarEditButton).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.actionBarSaveButton).setVisibility(View.GONE);
         getActivity().findViewById(R.id.actionBarRemoveButton).setVisibility(View.GONE);
 
         //投稿を取得

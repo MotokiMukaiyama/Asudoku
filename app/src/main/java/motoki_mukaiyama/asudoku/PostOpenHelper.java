@@ -5,8 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class PostOpenHelper extends SQLiteOpenHelper {
-    private static final String DB_NAME = "asudoku.db";
-    private static final int DB_VERSION = 29;
+
+    //デフォルトのDB設定（アプリ用）
+    //テストの場合は別のDBを設定する
+    private static String mDbName = "asudoku.db";
+    private static int mDbVersion = 33;
 
     // @formatter:off
     private static final String CREATE_TABLE_BOOKS =
@@ -50,7 +53,7 @@ public class PostOpenHelper extends SQLiteOpenHelper {
 
                     //デフォルト
                     + "(1, '（サンプル）アウトプット大全', '樺沢紫苑', '自己啓発', 5, '2019/01/01', '2019/01/01'), "
-                    + "(0, 'あす読の使い方', '著者○○', 'ジャンル○○', 3, '2019/01/02', '2019/01/02')"
+                    + "(0, 'あす読の使い方', '著者○○', 'ジャンル○○', 3, '2019/02/02', '2019/02/02')"
 
             //スクショ用
 //                    + "(3, 'アウトプット大全', '樺沢紫苑', '自己啓発', 5, '2019/04/26', '2019/04/26'), "
@@ -111,8 +114,19 @@ public class PostOpenHelper extends SQLiteOpenHelper {
     private static final String DROP_TABLE_MEMOS = "drop table if exists " + MemoContract.Memos.TABLE_NAME;
     // @formatter:on
 
+//    public PostOpenHelper(Context context, String dbName, int dbVersion) {
+//        super(context, dbName, null, dbVersion);
+//    }
+//    引数なしの場合は本番用のDB名とバージョンを使用する
     public PostOpenHelper(Context context) {
-        super(context, DB_NAME, null, DB_VERSION);
+        super(context, mDbName, null, mDbVersion);
+    }
+
+    public static void setmDbName(String mDbName){
+        PostOpenHelper.mDbName = mDbName;
+    }
+    public static void setmDbVersion(int mDbVersion){
+        PostOpenHelper.mDbVersion = mDbVersion;
     }
 
     @Override

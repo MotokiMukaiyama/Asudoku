@@ -40,7 +40,7 @@ public class PostEditFragment extends Fragment {
         //ツールバーのボタン表示切替
         getActivity().setTitle(R.string.ActionBarTitleEdit);
         getActivity().findViewById(R.id.actionBarAddButton).setVisibility(View.GONE);
-        getActivity().findViewById(R.id.actionBarEditButton).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.actionBarSaveButton).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.actionBarRemoveButton).setVisibility(View.VISIBLE);
 
         //前画面からpostIdを取得
@@ -64,7 +64,7 @@ public class PostEditFragment extends Fragment {
         });
 
         //保存ボタンのイベント
-        getActivity().findViewById(R.id.actionBarEditButton).setOnClickListener(new View.OnClickListener() {
+        getActivity().findViewById(R.id.actionBarSaveButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -131,8 +131,8 @@ public class PostEditFragment extends Fragment {
             //タイトルが入力されているときだけ追加ボタンを有効にする
             String title = ((EditText) view).getText().toString();
             // @formatter:off
-            if(title.isEmpty()) (getActivity().findViewById(R.id.actionBarEditButton)).setEnabled(false);
-            else                (getActivity().findViewById(R.id.actionBarEditButton)).setEnabled(true);
+            if(title.isEmpty()) (getActivity().findViewById(R.id.actionBarSaveButton)).setEnabled(false);
+            else                (getActivity().findViewById(R.id.actionBarSaveButton)).setEnabled(true);
             // @formatter:on
         }
     }
