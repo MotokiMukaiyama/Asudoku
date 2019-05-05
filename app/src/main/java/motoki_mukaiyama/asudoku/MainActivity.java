@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         //MobileAds の初期化
         //Sample ID : ca-app-pub-3940256099942544~3347511713
+        //       ID : ca-app-pub-6583713279393026~6676624532
         MobileAds.initialize(this, "ca-app-pub-6583713279393026~6676624532");
         AdView mAdView;
         mAdView = findViewById(R.id.adView);
