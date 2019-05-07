@@ -167,23 +167,37 @@ public class MainActivity extends AppCompatActivity {
     //サブスレッドのJSONをUIスレッドに反映するクラス
     private class ReflectResult implements Runnable {
 
-        // 蔵書一覧タイトルデータ
         private String title;
-        // 蔵書一覧概要データ
-        private String summary;
+        private String isbn10;
+        private String isbn13;
+        private String imageLink;
 
         //JSONをパースしてメンバに格納
         public ReflectResult(JSONArray items) {
 
             try {
-                // itemを取得
+                //itemを取得（ISBNで検索しているので一意に決まる）
                 JSONObject item = items.getJSONObject(0);
-                // volumeInfo（蔵書情報のグループ）を取得
-                JSONObject volumeInfo = item.getJSONObject("volumeInfo");
 
-                // データをリストに追加
+                //タイトルを取得
+                JSONObject volumeInfo = item.getJSONObject("volumeInfo");
                 title = volumeInfo.getString("title");
-                summary = volumeInfo.getString("description");
+
+                //ISBN（10桁と13桁）を取得
+                JSONArray industryIdentifiers = volumeInfo.getJSONArray("industryIdentifiers");
+                String identifier;
+                isbn10 = "";
+                isbn13 = "";
+                for(int i=0; i<industryIdentifiers.length(); ++i){
+                    identifier = industryIdentifiers.getJSONObject(i).getString("identifier");
+                    if(identifier.length() == 10) isbn10 = identifier;
+                    if(identifier.length() == 13) isbn13 = identifier;
+                }
+
+                //ImageLinkを取得
+                JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
+                imageLink = imageLinks.getString("thumbnail");
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -193,8 +207,10 @@ public class MainActivity extends AppCompatActivity {
         //UIスレッドに関する処理
         @Override
         public void run() {
-            Log.v("mytest", "title : " + title);
-            Log.v("mytest", "summary : " + summary);
+            Log.d("mytest", "title : " + title);
+            Log.d("mytest", "isbn10 : " + isbn10);
+            Log.d("mytest", "isbn13 : " + isbn13);
+            Log.d("mytest", "imageLink : " + imageLink);
             setTitle(title);
         }
     }
