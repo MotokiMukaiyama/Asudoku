@@ -20,6 +20,7 @@ import java.util.List;
 public class PostIndexFragment extends ListFragment {
 
     public static final String EXTRA_ID = "id";
+    public static final String EXTRA_ISBN = "isbn";
 
     public PostIndexFragment() {
     }

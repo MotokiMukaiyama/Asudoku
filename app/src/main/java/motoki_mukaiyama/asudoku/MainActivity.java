@@ -1,6 +1,5 @@
 package motoki_mukaiyama.asudoku;
 
-import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
@@ -24,8 +23,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import io.fabric.sdk.android.Fabric;
 import okhttp3.Call;
@@ -37,7 +34,6 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAnalytics mFirebaseAnalytics;
-    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,49 +55,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                OkHttpClient okHttpClient = new OkHttpClient();
-//                String url = "https://www.googleapis.com/books/v1/volumes?q=ほんきで学ぶAndroidアプリ開発入門";
-                String isbn = "9784309226729";
-                String url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
-                Request request = new Request.Builder().url(url).build();
-                handler = new Handler();
+                //バーコードリーダーを起動
+                new IntentIntegrator(MainActivity.this).initiateScan();
 
-                Callback callback = new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Log.e("failure API Response", e.getLocalizedMessage());
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-//                        Log.d("Success API Response", response.body().string());
-
-                        try {
-                            // JsonデータをJSONObjectに変換
-                            JSONObject rootJson = new JSONObject(response.body().string());
-
-                            // Jsonデータから蔵書リストデータ"items"を取得して、UIスレッドに反映
-                            JSONArray items = rootJson.getJSONArray("items");
-                            ReflectResult reflectResult = new ReflectResult(items);
-
-                            //UIスレッドに戻る
-                            handler.post(reflectResult);
-
-                        } catch (JSONException e) {
-                            // Jsonパースの時にエラーが発生したらログに出力する
-                            e.printStackTrace();
-                        }
-                    }
-                };
-
-                okHttpClient.newCall(request).enqueue(callback);
-
-
-//                //バーコードリーダーを起動
-//                new IntentIntegrator(MainActivity.this).initiateScan();
-
-//                //新規投稿フラグメントに遷移
-//                PostCreateFragment postCreateFragment = PostCreateFragment.newInstance();
+//                //新規投稿フラグメントに遷移 //TODO debug エミュレータ用でバーコードリーダースキップしている
+//                String isbn = "9784309226729";
+//                PostCreateFragment postCreateFragment = PostCreateFragment.newInstance(isbn);
 //                getSupportFragmentManager()
 //                        .beginTransaction()
 //                        .replace(R.id.mainFrameLayout, postCreateFragment)
@@ -152,66 +111,22 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //バーコードリーダーの読み取り結果
+    //バーコードリーダーの読み取り後の処理
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult != null) {
-            String content = intentResult.getContents();
-            setTitle(content); // TODO debug タイトルに表示している
-        }
-    }
 
-    //サブスレッドのJSONをUIスレッドに反映するクラス
-    private class ReflectResult implements Runnable {
-
-        private String title;
-        private String isbn10;
-        private String isbn13;
-        private String imageLink;
-
-        //JSONをパースしてメンバに格納
-        public ReflectResult(JSONArray items) {
-
-            try {
-                //itemを取得（ISBNで検索しているので一意に決まる）
-                JSONObject item = items.getJSONObject(0);
-
-                //タイトルを取得
-                JSONObject volumeInfo = item.getJSONObject("volumeInfo");
-                title = volumeInfo.getString("title");
-
-                //ISBN（10桁と13桁）を取得
-                JSONArray industryIdentifiers = volumeInfo.getJSONArray("industryIdentifiers");
-                String identifier;
-                isbn10 = "";
-                isbn13 = "";
-                for(int i=0; i<industryIdentifiers.length(); ++i){
-                    identifier = industryIdentifiers.getJSONObject(i).getString("identifier");
-                    if(identifier.length() == 10) isbn10 = identifier;
-                    if(identifier.length() == 13) isbn13 = identifier;
-                }
-
-                //ImageLinkを取得
-                JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
-                imageLink = imageLinks.getString("thumbnail");
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        //UIスレッドに関する処理
-        @Override
-        public void run() {
-            Log.d("mytest", "title : " + title);
-            Log.d("mytest", "isbn10 : " + isbn10);
-            Log.d("mytest", "isbn13 : " + isbn13);
-            Log.d("mytest", "imageLink : " + imageLink);
-            setTitle(title);
+            //新規投稿フラグメントに遷移
+            String isbn = intentResult.getContents();
+            PostCreateFragment postCreateFragment = PostCreateFragment.newInstance(isbn);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.mainFrameLayout, postCreateFragment)
+                    .addToBackStack(null)
+                    .commit();
         }
     }
 }
