@@ -3,6 +3,7 @@ package motoki_mukaiyama.asudoku;
 import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,11 +19,25 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import io.fabric.sdk.android.Fabric;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAnalytics mFirebaseAnalytics;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +59,44 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Log.v("mytest", "Click");
-                new IntentIntegrator(MainActivity.this).initiateScan();
+                OkHttpClient okHttpClient = new OkHttpClient();
+                Request request = new Request.Builder().url("https://www.googleapis.com/books/v1/volumes?q=ほんきで学ぶAndroidアプリ開発入門").build();
+                handler= new Handler();
+
+                Callback callback = new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.e("failure API Response", e.getLocalizedMessage());
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+//                        Log.d("Success API Response", response.body().string());
+
+                        try {
+                            // JsonデータをJSONObjectに変換
+                            JSONObject rootJson = new JSONObject(response.body().string());
+
+                            // Jsonデータから蔵書リストデータ"items"を取得して、UIスレッドに反映
+                            JSONArray items = rootJson.getJSONArray("items");
+                            ReflectResult reflectResult = new ReflectResult(items);
+
+                            //UIスレッドに戻る
+                            handler.post(reflectResult);
+
+                        } catch (JSONException e) {
+                            // Jsonパースの時にエラーが発生したらログに出力する
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+                okHttpClient.newCall(request).enqueue(callback);
+
+
+
+//                //バーコードリーダーを起動
+//                new IntentIntegrator(MainActivity.this).initiateScan();
 
 //                //新規投稿フラグメントに遷移
 //                PostCreateFragment postCreateFragment = PostCreateFragment.newInstance();
@@ -107,7 +158,48 @@ public class MainActivity extends AppCompatActivity {
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult != null) {
             String content = intentResult.getContents();
-            setTitle(content); // TODO debug
+            setTitle(content); // TODO debug タイトルに表示している
+        }
+    }
+
+    private class ReflectResult implements Runnable {
+
+        // 蔵書一覧タイトルデータリスト
+        private List<String> titleList;
+        // 蔵書一覧概要データリスト
+        private List<String> summaryList;
+
+        public ReflectResult(JSONArray items){
+            // リストデータを初期化
+            titleList = new ArrayList<>();
+            summaryList = new ArrayList<>();
+
+            // Jsonのパースエラーが発生した時に備えてtry~catchする
+            try{
+                // 蔵書リストの件数分繰り返しタイトルをログ出力する
+                for (int i = 0; i < items.length(); i ++) {
+                    // 蔵書リストから i番目のデータを取得
+                    JSONObject item = items.getJSONObject(i);
+                    // 蔵書のi番目データから蔵書情報のグループを取得
+                    JSONObject volumeInfo = item.getJSONObject("volumeInfo");
+                    // タイトルデータをリストに追加
+                    titleList.add(volumeInfo.getString("title"));
+                    // 概要データをリストに追加
+                    summaryList.add(volumeInfo.getString("description"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void run() {
+            for(String title : titleList){
+                Log.v("mytest", "title : " + title);
+            }
+            for(String summary : summaryList){
+                Log.v("mytest", "summary : " + summary);
+            }
         }
     }
 }
