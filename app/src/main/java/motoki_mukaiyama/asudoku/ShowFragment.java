@@ -49,7 +49,7 @@ public class ShowFragment extends Fragment {
 
         //ツールバーのボタン表示切替
         getActivity().findViewById(R.id.actionBarAddButton ).setVisibility(View.VISIBLE);
-        getActivity().findViewById(R.id.actionBarEditButton).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.actionBarSaveButton).setVisibility(View.GONE);
 
         //DB open
         PostOpenHelper postOpenHelper = new PostOpenHelper(getActivity());

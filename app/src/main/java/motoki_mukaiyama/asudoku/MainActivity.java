@@ -1,7 +1,13 @@
 package motoki_mukaiyama.asudoku;
 
+import android.app.Application;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.crashlytics.android.Crashlytics;
@@ -47,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         //MobileAds の初期化
         //Sample ID : ca-app-pub-3940256099942544~3347511713
+        //       ID : ca-app-pub-6583713279393026~6676624532
         MobileAds.initialize(this, "ca-app-pub-6583713279393026~6676624532");
         AdView mAdView;
         mAdView = findViewById(R.id.adView);
@@ -63,30 +70,26 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-//    //メニュー生成
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
+    //メニュー生成 //TODO create,edit画面では非表示にしたいが、ここでしかmenuを取得できない。引数で渡すのも面倒。
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.memu, menu);
+        return true;
+    }
 
-//    //メニュー押下
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        super.onOptionsItemSelected(item);
-//        int id = item.getItemId();
-//
-//        //投稿ボタンが押されたら
-//        if(id == R.id.actionBarAddButton){
-//
-//            //新規投稿フラグメントに遷移
-//            PostCreateFragment postCreateFragment = PostCreateFragment.newInstance();
-//            getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.mainFrameLayout, postCreateFragment)
-//                    .addToBackStack(null)
-//                    .commit();
-//        }
-//        return true;
-//    }
+    //メニュー押下
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+
+        //プライバシーポリシーが押されたら
+        if(id == R.id.menuItemPrivacyPolicy){
+            // プライバシーポリシーURLを開く
+            Uri uri = Uri.parse("https://asudoku-4a8ae.firebaseapp.com/");
+            Intent i = new Intent(Intent.ACTION_VIEW,uri);
+            startActivity(i);
+        }
+        return true;
+    }
 }

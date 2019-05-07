@@ -39,7 +39,7 @@ public class PostIndexFragment extends ListFragment {
         //TODO 関数化する fragment違うとfindViewById呼び出せない？
         //ツールバーのボタン表示切替
         getActivity().findViewById(R.id.actionBarAddButton ).setVisibility(View.VISIBLE);
-        getActivity().findViewById(R.id.actionBarEditButton).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.actionBarSaveButton).setVisibility(View.GONE);
         getActivity().findViewById(R.id.actionBarRemoveButton).setVisibility(View.GONE);
 
         //投稿を取得
@@ -84,25 +84,6 @@ public class PostIndexFragment extends ListFragment {
         }
     }
 
-
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//
-//        View v = inflater.inflate(R.layout.fragment_post_index, container, false);
-//        v.findViewById(R.id.postsListView);
-//
-//        //データが空の場合の挙動を設定
-//        View view = getActivity().findViewById(R.id.emptyView);
-//        view.setVisibility(View.GONE);
-//        listView.setEmptyView(view);
-//        if (listView.getCount() == 0) {
-////            getActivity().findViewById(R.id.postsListView).setVisibility(View.GONE);
-////            listView.setVisibility(View.GONE);
-//        }
-//
-//        return v;
-//    }
-
     //リストアイテムのクリックイベント
     private void onListItemClick(View view) {
 
@@ -118,22 +99,6 @@ public class PostIndexFragment extends ListFragment {
                 .addToBackStack(null)
                 .commit();
     }
-
-//    //メニューボタンのクリックイベント
-//    private void onMenuButtonClick(View view) {
-//
-//        //投稿idを取得
-//        View idView = ((View) view.getParent()).findViewById(R.id.id); //クリックされたviewの親の中のidに一致するviewを取得
-//        int postId = Integer.valueOf(((TextView) idView).getText().toString());
-//
-//        //フラグメント追加
-//        PostMenuFragment postMenuFragment = PostMenuFragment.newInstance(postId);
-//        getFragmentManager()
-//                .beginTransaction()
-//                .add(R.id.mainFrameLayout, postMenuFragment)
-//                .addToBackStack(null)
-//                .commit();
-//    }
 
     //TODO メモリの解放？
 //    @Override
@@ -174,7 +139,6 @@ public class PostIndexFragment extends ListFragment {
                 viewHolder.title            = convertView.findViewById(R.id.title);
                 viewHolder.category         = convertView.findViewById(R.id.category);
                 viewHolder.createdDate      = convertView.findViewById(R.id.createdDate);
-//                viewHolder.image            = convertView.findViewById(R.id.);
                 viewHolder.evaluationStar1  = convertView.findViewById(R.id.evaluationStar1);
                 viewHolder.evaluationStar2  = convertView.findViewById(R.id.evaluationStar2);
                 viewHolder.evaluationStar3  = convertView.findViewById(R.id.evaluationStar3);
@@ -194,24 +158,6 @@ public class PostIndexFragment extends ListFragment {
                 viewHolder.actionText3      = viewHolder.action3.findViewById(R.id.text);
                 // @formatter:on
                 convertView.setTag(viewHolder);
-//                int acqPadDp = 8;
-//                int actPadDp = 5;
-//                float scale = getResources().getDisplayMetrics().density; //画面のdensityを指定。
-//                int acqPadPx = (int) (acqPadDp * scale + 0.5f); //(int) (paddingDp * scale)とした場合は端数は切り捨て
-//                int actPadPx = (int) (actPadDp * scale + 0.5f); //(int) (paddingDp * scale)とした場合は端数は切り捨て
-//                ((ImageView) convertView.findViewById(R.id.acquisition1).findViewById(R.id.image)).setImageResource(R.drawable.ic_acquisition4);
-//                ((ImageView) convertView.findViewById(R.id.acquisition2).findViewById(R.id.image)).setImageResource(R.drawable.ic_acquisition4);
-//                ((ImageView) convertView.findViewById(R.id.acquisition3).findViewById(R.id.image)).setImageResource(R.drawable.ic_acquisition4);
-//                ((ImageView) convertView.findViewById(R.id.action1     ).findViewById(R.id.image)).setImageResource(R.drawable.ic_action3     );
-//                ((ImageView) convertView.findViewById(R.id.action2     ).findViewById(R.id.image)).setImageResource(R.drawable.ic_action3     );
-//                ((ImageView) convertView.findViewById(R.id.action3     ).findViewById(R.id.image)).setImageResource(R.drawable.ic_action3     );
-//                ((ImageView) convertView.findViewById(R.id.acquisition3).findViewById(R.id.image)).setMaxWidth(15);
-//                ((ImageView) convertView.findViewById(R.id.acquisition1).findViewById(R.id.image)).setPadding(acqPadPx, acqPadPx, acqPadPx, acqPadPx);
-//                ((ImageView) convertView.findViewById(R.id.acquisition2).findViewById(R.id.image)).setPadding(acqPadPx, acqPadPx, acqPadPx, acqPadPx);
-//                ((ImageView) convertView.findViewById(R.id.acquisition3).findViewById(R.id.image)).setPadding(acqPadPx, acqPadPx, acqPadPx, acqPadPx);
-//                ((ImageView) convertView.findViewById(R.id.action1     ).findViewById(R.id.image)).setPadding(actPadPx, actPadPx, actPadPx, actPadPx);
-//                ((ImageView) convertView.findViewById(R.id.action2     ).findViewById(R.id.image)).setPadding(actPadPx, actPadPx, actPadPx, actPadPx);
-//                ((ImageView) convertView.findViewById(R.id.action3     ).findViewById(R.id.image)).setPadding(actPadPx, actPadPx, actPadPx, actPadPx);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
@@ -248,15 +194,6 @@ public class PostIndexFragment extends ListFragment {
             if (post.isEmptyAction     (0)) viewHolder.action1     .setVisibility(View.GONE);
             if (post.isEmptyAction     (1)) viewHolder.action2     .setVisibility(View.GONE);
             if (post.isEmptyAction     (2)) viewHolder.action3     .setVisibility(View.GONE);
-            // @formatter:on
-
-//            //メニューボタンのクリック有効化
-//            (convertView.findViewById(R.id.menu_button)).setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    ((ListView) parent).performItemClick(view, pos, R.id.menu_button);
-//                }
-//            });
 
             return convertView;
         }
@@ -308,16 +245,4 @@ public class PostIndexFragment extends ListFragment {
 //        }
 //    }
 
-//    //Listの要素があればその要素を、なければ第三引数を返す
-//    private String getListElem(List<String> list, int index, String repStr) {
-//        if (list.size() > index) return list.get(index);
-//        else return repStr;
-//    }
-//
-//    //Listの要素が空文字か、そもそも要素がない場合はtrueを返す
-//    private boolean isEmptyListElem(List<String> list, int index) {
-//        if (list.size() > index && list.get(index).isEmpty()) return true;
-//        else if (list.size() > index && !list.get(index).isEmpty()) return false;
-//        else return true;
-//    }
 }
