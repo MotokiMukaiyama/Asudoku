@@ -15,6 +15,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -41,13 +43,17 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.actionBarAddButton ).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //新規投稿フラグメントに遷移
-                PostCreateFragment postCreateFragment = PostCreateFragment.newInstance();
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.mainFrameLayout, postCreateFragment)
-                        .addToBackStack(null)
-                        .commit();
+
+                Log.v("mytest", "Click");
+                new IntentIntegrator(MainActivity.this).initiateScan();
+
+//                //新規投稿フラグメントに遷移
+//                PostCreateFragment postCreateFragment = PostCreateFragment.newInstance();
+//                getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.mainFrameLayout, postCreateFragment)
+//                        .addToBackStack(null)
+//                        .commit();
             }
         });
 
@@ -91,5 +97,17 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         }
         return true;
+    }
+
+    //バーコードリーダーの読み取り結果
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (intentResult != null) {
+            String content = intentResult.getContents();
+            setTitle(content); // TODO debug
+        }
     }
 }
