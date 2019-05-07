@@ -55,13 +55,16 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar((android.support.v7.widget.Toolbar) findViewById(R.id.toolbar));
 
         //新規投稿ボタンのイベント登録
-        findViewById(R.id.actionBarAddButton ).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.actionBarAddButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 OkHttpClient okHttpClient = new OkHttpClient();
-                Request request = new Request.Builder().url("https://www.googleapis.com/books/v1/volumes?q=ほんきで学ぶAndroidアプリ開発入門").build();
-                handler= new Handler();
+//                String url = "https://www.googleapis.com/books/v1/volumes?q=ほんきで学ぶAndroidアプリ開発入門";
+                String isbn = "9784309226729";
+                String url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
+                Request request = new Request.Builder().url(url).build();
+                handler = new Handler();
 
                 Callback callback = new Callback() {
                     @Override
@@ -92,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 };
 
                 okHttpClient.newCall(request).enqueue(callback);
-
 
 
 //                //バーコードリーダーを起動
@@ -141,10 +143,10 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //プライバシーポリシーが押されたら
-        if(id == R.id.menuItemPrivacyPolicy){
+        if (id == R.id.menuItemPrivacyPolicy) {
             // プライバシーポリシーURLを開く
             Uri uri = Uri.parse("https://asudoku-4a8ae.firebaseapp.com/");
-            Intent i = new Intent(Intent.ACTION_VIEW,uri);
+            Intent i = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(i);
         }
         return true;
@@ -162,44 +164,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //サブスレッドのJSONをUIスレッドに反映するクラス
     private class ReflectResult implements Runnable {
 
-        // 蔵書一覧タイトルデータリスト
-        private List<String> titleList;
-        // 蔵書一覧概要データリスト
-        private List<String> summaryList;
+        // 蔵書一覧タイトルデータ
+        private String title;
+        // 蔵書一覧概要データ
+        private String summary;
 
-        public ReflectResult(JSONArray items){
-            // リストデータを初期化
-            titleList = new ArrayList<>();
-            summaryList = new ArrayList<>();
+        //JSONをパースしてメンバに格納
+        public ReflectResult(JSONArray items) {
 
-            // Jsonのパースエラーが発生した時に備えてtry~catchする
-            try{
-                // 蔵書リストの件数分繰り返しタイトルをログ出力する
-                for (int i = 0; i < items.length(); i ++) {
-                    // 蔵書リストから i番目のデータを取得
-                    JSONObject item = items.getJSONObject(i);
-                    // 蔵書のi番目データから蔵書情報のグループを取得
-                    JSONObject volumeInfo = item.getJSONObject("volumeInfo");
-                    // タイトルデータをリストに追加
-                    titleList.add(volumeInfo.getString("title"));
-                    // 概要データをリストに追加
-                    summaryList.add(volumeInfo.getString("description"));
-                }
+            try {
+                // itemを取得
+                JSONObject item = items.getJSONObject(0);
+                // volumeInfo（蔵書情報のグループ）を取得
+                JSONObject volumeInfo = item.getJSONObject("volumeInfo");
+
+                // データをリストに追加
+                title = volumeInfo.getString("title");
+                summary = volumeInfo.getString("description");
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
 
+        //UIスレッドに関する処理
         @Override
         public void run() {
-            for(String title : titleList){
-                Log.v("mytest", "title : " + title);
-            }
-            for(String summary : summaryList){
-                Log.v("mytest", "summary : " + summary);
-            }
+            Log.v("mytest", "title : " + title);
+            Log.v("mytest", "summary : " + summary);
+            setTitle(title);
         }
     }
 }
