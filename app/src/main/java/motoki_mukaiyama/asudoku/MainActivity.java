@@ -56,16 +56,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //バーコードリーダーを起動
-                new IntentIntegrator(MainActivity.this).initiateScan();
+//                new IntentIntegrator(MainActivity.this).initiateScan();
 
-//                //新規投稿フラグメントに遷移 //TODO debug エミュレータ用でバーコードリーダースキップしている
-//                String isbn = "9784309226729";
-//                PostCreateFragment postCreateFragment = PostCreateFragment.newInstance(isbn);
-//                getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.mainFrameLayout, postCreateFragment)
-//                        .addToBackStack(null)
-//                        .commit();
+                //新規投稿フラグメントに遷移 //TODO debug エミュレータ用でバーコードリーダースキップしている
+                String isbn = "9784309226729";
+                PostCreateFragment postCreateFragment = PostCreateFragment.newInstance(isbn);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.mainFrameLayout, postCreateFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
